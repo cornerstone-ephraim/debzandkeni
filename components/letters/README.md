@@ -19,7 +19,9 @@ traffic and the camera. Ten small vehicles use simple meshes; instancing can be
 introduced if the scene grows. Pixel density is capped at 1.5. Native scroll progress within the letter container
 controls the camera; text remains accessible HTML.
 
-Reduced motion uses `scene-fallback.tsx`, a static Tower Bridge illustration.
+Reduced motion initially uses `scene-fallback.tsx`, a static Tower Bridge
+illustration. Play remains available and explicitly enables the live scene and
+snow, while keeping the heart and passage transitions reduced.
 The same illustration remains behind the canvas while loading or when the
 scene boundary catches a renderer failure. CSS snowfall respects reduced motion and inherits the pause state. Warm windows
 use emissive materials against a cool evening palette. The pause button stops snow, traffic,

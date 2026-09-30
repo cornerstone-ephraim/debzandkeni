@@ -320,7 +320,7 @@
   .heart-bounce {
     animation: none;
   }
-  .snowfall {
+  .letters-experience:not([data-world-motion="playing"]) .snowfall {
     display: none;
   }
   .letter-scroll {

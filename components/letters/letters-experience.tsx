@@ -31,9 +31,12 @@ class SceneBoundary extends Component<
 
 export function LettersExperience() {
   const [open, setOpen] = useState(false);
-  const [paused, setPaused] = useState(false);
+  const [pauseOverride, setPauseOverride] = useState<boolean | null>(null);
   const [activePassage, setActivePassage] = useState(0);
   const reduced = useReducedMotion();
+  // Respect the device preference initially, but let an explicit Play override it.
+  const paused = pauseOverride ?? !!reduced;
+  const showLiveScene = !reduced || pauseOverride !== null;
   const scrollContainer = useRef<HTMLElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const { scrollYProgress } = useScroll({
@@ -58,7 +61,10 @@ export function LettersExperience() {
     };
   }, [open]);
   return (
-    <main className={`letters-experience ${open ? "is-open" : "is-sealed"}`}>
+    <main
+      className={`letters-experience ${open ? "is-open" : "is-sealed"}`}
+      data-world-motion={paused ? "paused" : "playing"}
+    >
       <div className="letter-stage" inert={!open} aria-hidden={!open}>
         <header className="letter-header">
           <span>
@@ -136,7 +142,7 @@ export function LettersExperience() {
           aria-label="Early winter night in London: snow falls over Tower Bridge and the Thames, with red buses and glowing windows."
         >
           <SceneFallback />
-          {!reduced && (
+          {showLiveScene && (
             <SceneBoundary>
               <LondonScene
                 progress={scrollYProgress}
@@ -164,7 +170,7 @@ export function LettersExperience() {
           ))}
         </div>
         <footer className="letter-footer">
-          <WorldControl paused={paused} setPaused={setPaused} />
+          <WorldControl paused={paused} setPaused={setPauseOverride} />
         </footer>
       </div>
       {!open && <HeartGate onOpen={() => setOpen(true)} />}
@@ -179,17 +185,16 @@ const WorldControl = ({
   paused: boolean;
   setPaused: (paused: boolean) => void;
 }) => {
-  const reduced = useReducedMotion();
   return (
     <button
       onClick={() => setPaused(!paused)}
-      aria-pressed={paused || !!reduced}
-      disabled={!!reduced}
+      aria-pressed={paused}
+      aria-label={paused ? "Play the world" : "Pause the world"}
     >
-      {paused || reduced ? (
+      {paused ? (
         <span className="flex items-center justify-center gap-2">
           <Play className="w-3" />
-          Still World
+          Play the world
         </span>
       ) : (
         <span className="flex items-center justify-center gap-2">
