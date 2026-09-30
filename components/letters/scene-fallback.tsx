@@ -11,6 +11,45 @@ export function SceneFallback() {
         fill="#667386"
         d="M0 225V185H80V160H140V205H210V150H270V175H340V210H1090V185H1160V155H1210V195H1320V160H1400V260H0z"
       />
+      <g>
+        <path fill="#334c43" d="M0 254H405V310H0zM995 254H1400V310H995z" />
+        <path fill="#969287" d="M0 278H410V290H0zM990 278H1400V290H990z" />
+        {Array.from({ length: 16 }, (_, i) => {
+          const x = i < 8 ? i * 47 : 1010 + (i - 8) * 47;
+          const h = 52 + (i % 3) * 17;
+          return (
+            <g key={i}>
+              <rect
+                x={x}
+                y={264 - h}
+                width="35"
+                height={h}
+                fill={i % 2 ? "#76685f" : "#89909b"}
+              />
+              {[0, 1, 2].map((row) => (
+                <g key={row}>
+                  <rect
+                    x={x + 7}
+                    y={272 - h + row * 15}
+                    width="5"
+                    height="8"
+                    fill="#f5cd89"
+                  />
+                  <rect
+                    x={x + 23}
+                    y={272 - h + row * 15}
+                    width="5"
+                    height="8"
+                    fill="#f5cd89"
+                  />
+                </g>
+              ))}
+              <path d={`M${x + 39} 276v-22`} stroke="#635549" strokeWidth="3" />
+              <ellipse cx={x + 39} cy="249" rx="7" ry="12" fill="#3c5c4b" />
+            </g>
+          );
+        })}
+      </g>
       <g fill="#89909b" stroke="#a1a9b5" strokeWidth="5">
         <path d="M420 280V100H470V70H530V100H580V280H535V215Q500 170 465 215V280z" />
         <path d="M820 280V100H870V70H930V100H980V280H935V215Q900 170 865 215V280z" />

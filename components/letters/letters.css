@@ -1,4 +1,4 @@
-/* Fixed scenery and native scroll-snap passages share a single viewport. */
+/* Fixed text and scenery follow one smoothly scrolling progress surface. */
 .letters-experience {
   --paper: #f5f2e9;
   --evening: #172537;
@@ -11,11 +11,13 @@
   color: var(--ink);
   background: var(--evening);
 }
+
 .letter-stage {
   height: 100%;
   isolation: isolate;
   background: linear-gradient(180deg, #172537, #27374a);
 }
+
 .letter-header {
   position: fixed;
   z-index: 4;
@@ -29,10 +31,12 @@
   letter-spacing: -0.04em;
   pointer-events: none;
 }
+
 .letter-header i {
   color: var(--love);
   padding: 0 4px;
 }
+
 .header-dedication {
   font-size: 14px;
   font-style: italic;
@@ -45,19 +49,24 @@
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  scroll-snap-type: y mandatory;
   overscroll-behavior-y: contain;
   outline: none;
+  scrollbar-width: none;
 }
+
+.letter-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 .letter-scroll:focus-visible {
   outline: 1px solid var(--muted-ink);
   outline-offset: -4px;
 }
+
 .letter-chapter {
   height: 100svh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
+
 .letter-copy-stage {
   position: fixed;
   inset: 0;
@@ -67,20 +76,21 @@
   padding: 100px 0 34svh;
   pointer-events: none;
 }
+
 .love-letter {
   width: min(650px, 86%);
-  pointer-events: auto;
-  max-height: calc(100svh - 150px);
-  overflow-y: auto;
+  pointer-events: none;
   text-align: center;
   text-shadow: 0 2px 14px var(--evening);
 }
+
 .letter-date {
   font-family: var(--font-jost), sans-serif;
   font-size: 11px;
   letter-spacing: 0.15em;
   color: var(--muted-ink);
 }
+
 .love-letter h1 {
   margin: 18px 0 28px;
   font-size: clamp(42px, 4.8vw, 66px);
@@ -90,28 +100,33 @@
   letter-spacing: -0.04em;
   outline: none;
 }
+
 .letter-paragraph {
   font-size: clamp(21px, 2vw, 27px);
   line-height: 1.55;
   text-wrap: pretty;
 }
+
 .letter-signoff {
   margin-top: 30px;
   font-size: 19px;
   font-style: italic;
   line-height: 1.6;
 }
+
 .letter-signoff span {
   display: block;
   font-size: 36px;
   color: var(--love);
 }
+
 .scroll-invitation {
   margin-top: 30px;
   font-size: 13px;
   font-style: italic;
   color: var(--muted-ink);
 }
+
 .london-landscape {
   position: fixed;
   z-index: 1;
@@ -121,30 +136,55 @@
   pointer-events: none;
   mask-image: linear-gradient(to bottom, transparent, black 18%);
 }
+
 .london-landscape > div {
   position: absolute !important;
   inset: 0;
 }
+
 .scene-fallback {
   width: 100%;
   height: 100%;
   position: absolute;
   inset: 0;
 }
+
 .london-landscape:has(canvas) .scene-fallback {
   visibility: hidden;
 }
-.winter-moon {
+
+.night-sky {
   position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.night-stars {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60%;
+  fill: #fff4d7;
+  mask-image: linear-gradient(black 75%, transparent);
+}
+
+.winter-moon {
+  position: absolute;
   left: 13%;
   top: 19%;
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: #e8e4cf;
-  box-shadow: 0 0 65px #dde5ef24;
-  opacity: 0.75;
+  background:
+    radial-gradient(circle at 35% 38%, #e7e2c8 0 6%, transparent 7%),
+    radial-gradient(circle at 63% 65%, #eae5cc 0 10%, transparent 11%), #fff9dd;
+  box-shadow:
+    0 0 24px #fff3bd55,
+    0 0 65px #fff3bd33,
+    0 0 110px #fff3bd11;
 }
+
 .letter-footer {
   position: fixed;
   z-index: 4;
@@ -159,6 +199,7 @@
   font-style: italic;
   background: linear-gradient(transparent, #172537c9);
 }
+
 .letter-footer button {
   font: inherit;
   color: inherit;
@@ -168,15 +209,18 @@
   cursor: pointer;
   padding: 6px 0;
 }
+
 .letter-footer button:disabled {
   cursor: default;
 }
+
 .letter-footer button:focus-visible,
 .heart-invitation:focus-visible {
   outline: 2px solid var(--love);
   outline-offset: 8px;
   border-radius: 8px;
 }
+
 .heart-gate {
   position: fixed;
   z-index: 10;
@@ -186,6 +230,7 @@
   background: var(--paper);
   overflow: hidden;
 }
+
 .heart-invitation {
   position: relative;
   background: none;
@@ -196,11 +241,13 @@
   height: 160px;
   -webkit-tap-highlight-color: transparent;
 }
+
 .heart-expansion {
   display: block;
   position: relative;
   z-index: 2;
 }
+
 .heart-shape {
   display: block;
   width: 132px;
@@ -208,9 +255,11 @@
   overflow: visible;
   filter: drop-shadow(0 12px 12px #8d39341a);
 }
+
 .heart-bounce {
   animation: heart-excited 1.8s infinite;
 }
+
 .heart-note {
   position: absolute;
   top: 156px;
@@ -221,6 +270,7 @@
   transform: rotate(-9deg);
   transition: opacity 150ms;
 }
+
 .heart-note svg {
   width: 55px;
   height: 55px;
@@ -228,6 +278,7 @@
   left: -37px;
   top: -25px;
 }
+
 @keyframes heart-excited {
   0%,
   65%,
@@ -247,6 +298,7 @@
     transform: translateY(0) rotate(-2deg);
   }
 }
+
 @media (hover: hover) and (pointer: fine) {
   .heart-invitation:hover .heart-bounce {
     animation-duration: 1.1s;
@@ -257,6 +309,7 @@
   --ink: #433e37;
   --love: #b84239;
 }
+
 .snowfall {
   position: fixed;
   inset: 0;
@@ -264,6 +317,7 @@
   z-index: 1;
   overflow: hidden;
 }
+
 .snowfall span {
   position: absolute;
   top: -12px;
@@ -273,6 +327,7 @@
   animation: snowfall linear infinite;
   animation-play-state: inherit;
 }
+
 @keyframes snowfall {
   from {
     transform: translate3d(-25px, -10px, 0);
@@ -281,6 +336,7 @@
     transform: translate3d(45px, 105svh, 0);
   }
 }
+
 @media (max-width: 650px) {
   .letter-header {
     top: 23px;
@@ -316,14 +372,12 @@
     padding: 12px 22px;
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
   .heart-bounce {
     animation: none;
   }
   .letters-experience:not([data-world-motion="playing"]) .snowfall {
     display: none;
-  }
-  .letter-scroll {
-    scroll-snap-type: y proximity;
   }
 }

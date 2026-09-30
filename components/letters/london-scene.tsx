@@ -2,8 +2,9 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import type { Group } from "three";
+import type { Group, OrthographicCamera } from "three";
 import type { MotionValue } from "motion/react";
+import { LondonBanks } from "./london-banks";
 import { Block, Bridge } from "./bridge";
 import { palette as p } from "./scene-palette";
 
@@ -15,18 +16,18 @@ function Traffic({ paused }: { paused: boolean }) {
       const direction = i % 2 === 0 ? 1 : -1;
       car.position.x +=
         Math.min(delta, 0.05) * direction * (i % 3 === 0 ? 1.15 : 1.65);
-      if (car.position.x > 28) car.position.x = -28;
-      if (car.position.x < -28) car.position.x = 28;
+      if (car.position.x > 90) car.position.x = -90;
+      if (car.position.x < -90) car.position.x = 90;
     });
   });
   return (
     <group ref={fleet}>
-      {Array.from({ length: 10 }, (_, i) => {
+      {Array.from({ length: 24 }, (_, i) => {
         const bus = i % 3 === 0;
         return (
           <group
             key={i}
-            position={[-25 + i * 5.5, 1.85, i % 2 === 0 ? -0.43 : 0.43]}
+            position={[-86 + i * 7.4, 1.85, i % 2 === 0 ? -0.43 : 0.43]}
             rotation={[0, i % 2 === 0 ? 0 : Math.PI, 0]}
           >
             <Block
@@ -68,46 +69,6 @@ function Traffic({ paused }: { paused: boolean }) {
   );
 }
 
-function Riverside() {
-  return (
-    <group>
-      <Block position={[0, -0.1, -10]} size={[90, 0.8, 6]} color={p.bank} />
-      {Array.from({ length: 25 }, (_, i) => {
-        const x = (i - 12) * 3.25;
-        const height = 1.8 + ((i * 7) % 5) * 0.45;
-        return (
-          <group key={i} position={[x, 0, -11]}>
-            <Block
-              position={[0, height / 2 + 0.3, 0]}
-              size={[2.7, height, 2.8]}
-              color={i % 3 === 0 ? p.stone : p.trim}
-            />
-            <Block
-              position={[0, height + 0.4, 0]}
-              size={[2.9, 0.25, 3]}
-              color={p.roof}
-            />
-            {[0, 1, 2].flatMap((row) =>
-              [-0.8, 0, 0.8].map((col) => (
-                <Block
-                  key={`${row}-${col}`}
-                  position={[col, 0.9 + row * 0.7, 1.41]}
-                  size={[0.3, 0.4, 0.03]}
-                  color={(row + i) % 3 === 0 ? p.window : p.roof}
-                />
-              )),
-            )}
-          </group>
-        );
-      })}
-      <mesh position={[20, 7, -18]}>
-        <coneGeometry args={[1.8, 14, 4]} />
-        <meshStandardMaterial color={p.steel} transparent opacity={0.35} />
-      </mesh>
-    </group>
-  );
-}
-
 function World({
   progress,
   paused,
@@ -117,14 +78,23 @@ function World({
 }) {
   const boat = useRef<Group>(null);
   const cameraProgress = useRef(0);
-  useFrame(({ camera, clock, size }) => {
-    if (!paused) cameraProgress.current = progress.get();
+  useFrame(({ camera, clock, size }, delta) => {
+    if (!paused) {
+      const blend = 1 - Math.exp(-8 * Math.min(delta, 0.05));
+      cameraProgress.current +=
+        (progress.get() - cameraProgress.current) * blend;
+    }
     const t = cameraProgress.current;
-    const mobile = size.width < 650;
-    // Travel from the western riverside, through the bridge, to the eastern city.
-    const focusX = -23 + t * 46;
-    camera.position.set(focusX + 5, mobile ? 10 : 11, mobile ? 33 : 29);
-    camera.lookAt(focusX, 2.7, -2);
+    // A level side elevation: no horizontal yaw, roll, or perspective convergence.
+    const focusX = -38 + t * 76;
+    const lens = camera as OrthographicCamera;
+    const zoom = size.height / 18;
+    if (lens.zoom !== zoom) {
+      lens.zoom = zoom;
+      lens.updateProjectionMatrix();
+    }
+    camera.position.set(focusX, 8.5, 40);
+    camera.lookAt(focusX, 5, 0);
     if (boat.current && !paused) {
       boat.current.position.x = Math.sin(clock.elapsedTime * 0.035) * 17;
       boat.current.position.y = Math.sin(clock.elapsedTime * 1.2) * 0.025;
@@ -147,7 +117,7 @@ function World({
           metalness={0.15}
         />
       </mesh>
-      <Riverside />
+      <LondonBanks />
       <Bridge />
       <Traffic paused={paused} />
       <group ref={boat} position={[0, 0, 8]}>
@@ -183,7 +153,8 @@ export default function LondonScene({
   return (
     <Canvas
       dpr={[1, 1.5]}
-      camera={{ position: [17, 12, 35], fov: 35 }}
+      orthographic
+      camera={{ position: [-38, 8.5, 40], zoom: 20, near: 0.1, far: 250 }}
       gl={{ antialias: true, alpha: true }}
       frameloop={paused ? "demand" : "always"}
       fallback={<span />}

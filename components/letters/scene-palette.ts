@@ -9,5 +9,11 @@ export const palette = {
   window: "#f5cd89",
   dark: "#4c6164",
   bus: "#b94438",
+  grass: "#334c43",
+  foliage: "#3c5c4b",
+  trunk: "#635549",
+  pavement: "#969287",
+  brick: "#916b5b",
+  cream: "#b9aa8b",
   sky: "#172537",
 };

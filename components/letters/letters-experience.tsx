@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Lenis from "lenis";
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 import {
   AnimatePresence,
@@ -11,6 +12,7 @@ import {
 } from "motion/react";
 import { decemberLetter as letter } from "@/data/letters";
 import { HeartGate } from "./heart-gate";
+import { NightSky } from "./night-sky";
 import { SceneFallback } from "./scene-fallback";
 import "./letters.css";
 import { Pause, Play } from "lucide-react";
@@ -39,12 +41,30 @@ export function LettersExperience() {
   const showLiveScene = !reduced || pauseOverride !== null;
   const scrollContainer = useRef<HTMLElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
+  const scrollContent = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     container: scrollContainer,
   });
+
+  useEffect(() => {
+    if (!open || reduced || !scrollContainer.current || !scrollContent.current)
+      return;
+    const scrolling = new Lenis({
+      wrapper: scrollContainer.current,
+      content: scrollContent.current,
+      autoRaf: true,
+      smoothWheel: true,
+      syncTouch: false,
+      lerp: 0.1,
+      wheelMultiplier: 0.8,
+    });
+    return () => scrolling.destroy();
+  }, [open, reduced]);
+
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     setActivePassage(Math.round(progress * (letter.paragraphs.length - 1)));
   });
+
   useEffect(() => {
     if (open) {
       heading.current?.focus({ preventScroll: true });
@@ -60,6 +80,7 @@ export function LettersExperience() {
       window.history.scrollRestoration = restoration;
     };
   }, [open]);
+
   return (
     <main
       className={`letters-experience ${open ? "is-open" : "is-sealed"}`}
@@ -74,16 +95,18 @@ export function LettersExperience() {
             A little world, just for you.
           </span>
         </header>
-        <div className="winter-moon" aria-hidden="true" />
+        <NightSky scrollYProgress={scrollYProgress} />
         <article
           ref={scrollContainer}
           className="letter-scroll"
           aria-label="December letter from Keniye to Debz"
           tabIndex={0}
         >
-          {letter.paragraphs.map((_, index) => (
-            <div className="letter-chapter" key={index} aria-hidden="true" />
-          ))}
+          <div ref={scrollContent}>
+            {letter.paragraphs.map((_, index) => (
+              <div className="letter-chapter" key={index} aria-hidden="true" />
+            ))}
+          </div>
           <div
             className="letter-copy-stage"
             aria-live="polite"
