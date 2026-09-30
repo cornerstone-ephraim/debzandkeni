@@ -73,23 +73,23 @@ export function SceneOne() {
       {/* Sticky inner: stays in viewport while user scrolls through the outer height */}
       <div
         style={{ background: bgColor }}
-        className={`sticky top-0 h-screen overflow-hidden transition-all ease-linear duration-300`}
+        className={`sticky top-0 h-screen overflow-hidden transition-all duration-300 ease-linear`}
       >
         {/* ── LAYER 1: Atmospheric nebula (slowest parallax) ── */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{
             transform: `translateY(${starParallax}px)`,
             zIndex: 1,
           }}
         >
           {/* Subtle nebula blobs */}
-          <div className="absolute top-[10%] left-[5%] rounded-[50%] w-[40vw] h-[40vw] bg-[radial-gradient(circle_at_center,rgba(45,27,78,0.35)_0%,transparent_70%)] blur-[60px]" />
-          <div className="absolute pointer-events-none top-[20%] right-[8%] blur-[50px] w-[35vw] h-[35vw] rounded-[50%] bg-[radial-gradient(circle_at_center,rgba(26,39,68,0.4)_0%,transparent_70%)]" />
+          <div className="absolute top-[10%] left-[5%] h-[40vw] w-[40vw] rounded-[50%] bg-[radial-gradient(circle_at_center,rgba(45,27,78,0.35)_0%,transparent_70%)] blur-[60px]" />
+          <div className="pointer-events-none absolute top-[20%] right-[8%] h-[35vw] w-[35vw] rounded-[50%] bg-[radial-gradient(circle_at_center,rgba(26,39,68,0.4)_0%,transparent_70%)] blur-[50px]" />
 
           {/* Warm horizon glow — grows as progress increases */}
           <div
-            className={`absolute bottom-0 left-0 right-0 h-[70vh] transition-none`}
+            className={`absolute right-0 bottom-0 left-0 h-[70vh] transition-none`}
             style={{
               background: `radial-gradient(ellipse at 50% 100%, rgba(212,168,83,${
                 0.04 + progress * 0.12
@@ -100,11 +100,11 @@ export function SceneOne() {
 
         {/* ── LAYER 2: Cloud / particle atmosphere (medium parallax) ── */}
         <div
-          className="absolute inset-0 pointer-events-none z-2"
+          className="pointer-events-none absolute inset-0 z-2"
           style={{ transform: `translateY(${cloudOffset}px)` }}
         >
           <svg
-            className="absolute w-full h-full"
+            className="absolute h-full w-full"
             viewBox="0 0 1440 900"
             preserveAspectRatio="xMidYMid slice"
           >
@@ -143,7 +143,7 @@ export function SceneOne() {
 
         {/* ── LAYER 3: Timeline path line ── */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 pointer-events-none z-3 bottom-0 w-0.5 transition-none"
+          className="pointer-events-none absolute bottom-0 left-1/2 z-3 w-0.5 -translate-x-1/2 transition-none"
           style={{
             height: `${20 + progress * 30}vh`,
             background:
@@ -152,14 +152,14 @@ export function SceneOne() {
         />
 
         {/* ── LAYER 4: Characters ── */}
-        <div className="absolute w-full pointer-events-none bottom-[12vh] z-4">
+        <div className="pointer-events-none absolute bottom-[12vh] z-4 w-full">
           <CharacterPair progress={charProgress} />
         </div>
 
         {/* ── LAYER 5: Clock ── */}
         <div
           style={{ opacity: showCountdown ? 1 : 0 }}
-          className="absolute left-1/2 top-[18vh] -translate-x-1/2 pointer-events-none z-5 transition-opacity duration-800 ease-linear"
+          className="pointer-events-none absolute top-[18vh] left-1/2 z-5 -translate-x-1/2 transition-opacity duration-800 ease-linear"
         >
           <CountdownClock progress={clockProgress} />
         </div>
@@ -169,14 +169,12 @@ export function SceneOne() {
         {/* Opening chapter label */}
         <div
           style={{ opacity: showOpeningText ? 1 : 0 }}
-          className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none z-6 top-[30vh] transition-opacity duration-1000 ease-linear w-[90vw] flex flex-col gap-2.5 items-center"
+          className="pointer-events-none absolute top-[30vh] left-1/2 z-6 flex w-[90vw] -translate-x-1/2 flex-col items-center gap-2.5 text-center transition-opacity duration-1000 ease-linear"
         >
-          <p className="chapter-kicker text-warm-gold mb-2 opacity-70">
+          <p className="chapter-kicker mb-2 text-warm-gold opacity-70">
             Chapter I
           </p>
-          <h2 className="chapter-heading text-foreground">
-            {event.chapter}
-          </h2>
+          <h2 className="chapter-heading text-foreground">{event.chapter}</h2>
           {/* <div className="w-15 h-px bg-warm-gold my-3.5 mx-auto opacity-50" /> */}
           <p className="font-jost tracking-widest text-foreground uppercase opacity-45">
             Scroll to begin
@@ -185,30 +183,30 @@ export function SceneOne() {
 
         {/* Meeting moment text */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none z-6 top-[30vh] transition-all duration-900 ease-linear w-[min(600px,88vw)]"
+          className="pointer-events-none absolute top-[30vh] left-1/2 z-6 w-[min(600px,88vw)] -translate-x-1/2 text-center transition-all duration-900 ease-linear"
           style={{
             opacity: showMeetText ? 1 : 0,
             transform: `translateY(${showMeetText ? 0 : 12}px)`,
           }}
         >
-          <p className="story-copy italic text-foreground tracking-[0.04em] opacity-85">
+          <p className="story-copy tracking-[0.04em] text-foreground italic opacity-85">
             {event.title}
           </p>
         </div>
 
         {/* Midnight reveal text */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none z-6 top-[30vh] transition-all duration-1200 ease-linear w-[min(700px,90vw)]"
+          className="pointer-events-none absolute top-[30vh] left-1/2 z-6 w-[min(700px,90vw)] -translate-x-1/2 text-center transition-all duration-1200 ease-linear"
           style={{
             opacity: showRevealText ? 1 : 0,
             transform: `translateY(${showRevealText ? 0 : 16}px)`,
           }}
         >
-          <p className="reveal-kicker text-warm-gold mb-4 opacity-80">
+          <p className="reveal-kicker mb-4 text-warm-gold opacity-80">
             {event.date}
           </p>
 
-          <h3 className="reveal-heading text-foreground mb-5">
+          <h3 className="reveal-heading mb-5 text-foreground">
             {event.description}
           </h3>
 

@@ -70,7 +70,8 @@ export const journeyToJanuaryMilestones: TimelineMilestone[] = [
     id: "july-2026",
     month: "July 2026",
     title: "A little more real",
-    description: "Space reserved for the next ultrasound, first notes, and small discoveries.",
+    description:
+      "Space reserved for the next ultrasound, first notes, and small discoveries.",
     future: true,
     locked: true,
   },
@@ -78,7 +79,8 @@ export const journeyToJanuaryMilestones: TimelineMilestone[] = [
     id: "august-2026",
     month: "August 2026",
     title: "Growing quietly",
-    description: "A place for bump photos, family messages, and the details they will want to remember.",
+    description:
+      "A place for bump photos, family messages, and the details they will want to remember.",
     future: true,
     locked: true,
   },
@@ -86,7 +88,8 @@ export const journeyToJanuaryMilestones: TimelineMilestone[] = [
     id: "september-2026",
     month: "September 2026",
     title: "The world begins to prepare",
-    description: "Future memories can live here: plans, names, colors, tiny decisions.",
+    description:
+      "Future memories can live here: plans, names, colors, tiny decisions.",
     future: true,
     locked: true,
   },
@@ -94,7 +97,8 @@ export const journeyToJanuaryMilestones: TimelineMilestone[] = [
     id: "october-2026",
     month: "October 2026",
     title: "Rooms become ready",
-    description: "Reserved for nursery updates, keepsakes, and the first signs of their new rhythm.",
+    description:
+      "Reserved for nursery updates, keepsakes, and the first signs of their new rhythm.",
     future: true,
     locked: true,
   },
@@ -102,7 +106,8 @@ export const journeyToJanuaryMilestones: TimelineMilestone[] = [
     id: "november-2026",
     month: "November 2026",
     title: "The circle widens",
-    description: "A future home for baby shower moments, blessings, and messages from loved ones.",
+    description:
+      "A future home for baby shower moments, blessings, and messages from loved ones.",
     future: true,
     locked: true,
   },
@@ -110,7 +115,8 @@ export const journeyToJanuaryMilestones: TimelineMilestone[] = [
     id: "december-2026",
     month: "December 2026",
     title: "One year since hello",
-    description: "The timeline returns to December carrying more than either of them could have imagined.",
+    description:
+      "The timeline returns to December carrying more than either of them could have imagined.",
     future: true,
     locked: true,
   },
@@ -118,7 +124,8 @@ export const journeyToJanuaryMilestones: TimelineMilestone[] = [
     id: "january-2027",
     month: "January 2027",
     title: "Arrival month",
-    description: "Ready for names, photos, birth times, weights, and the first portrait of four.",
+    description:
+      "Ready for names, photos, birth times, weights, and the first portrait of four.",
     future: true,
     locked: true,
   },

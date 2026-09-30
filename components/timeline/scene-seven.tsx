@@ -44,37 +44,43 @@ export function SceneSeven() {
         }}
       >
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{ transform: `translateY(${bgParallax}px)`, zIndex: 1 }}
         >
           <div
-            className="absolute left-1/2 top-[36%] h-[70vw] w-[70vw] -translate-x-1/2 rounded-[50%]"
+            className="absolute top-[36%] left-1/2 h-[70vw] w-[70vw] -translate-x-1/2 rounded-[50%]"
             style={{
               background: `radial-gradient(circle, rgba(240,201,122,${0.08 + arrivalGlow * 0.2}) 0%, transparent 64%)`,
               filter: "blur(84px)",
             }}
           />
           <div
-            className="absolute left-[-12%] top-[8%] h-[52vw] w-[52vw] rounded-[50%]"
+            className="absolute top-[8%] left-[-12%] h-[52vw] w-[52vw] rounded-[50%]"
             style={{
-              background: "radial-gradient(circle, rgba(232,149,122,0.13) 0%, transparent 68%)",
+              background:
+                "radial-gradient(circle, rgba(232,149,122,0.13) 0%, transparent 68%)",
               filter: "blur(86px)",
             }}
           />
           <div
-            className="absolute right-[-12%] top-[10%] h-[52vw] w-[52vw] rounded-[50%]"
+            className="absolute top-[10%] right-[-12%] h-[52vw] w-[52vw] rounded-[50%]"
             style={{
-              background: "radial-gradient(circle, rgba(100,181,246,0.12) 0%, transparent 68%)",
+              background:
+                "radial-gradient(circle, rgba(100,181,246,0.12) 0%, transparent 68%)",
               filter: "blur(86px)",
             }}
           />
         </div>
 
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{ transform: `translateY(${midParallax}px)`, zIndex: 2 }}
         >
-          <svg className="absolute h-full w-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+          <svg
+            className="absolute h-full w-full"
+            viewBox="0 0 1440 900"
+            preserveAspectRatio="xMidYMid slice"
+          >
             <path
               d="M 130 760 C 360 590 520 470 720 380 C 930 286 1110 226 1320 110"
               stroke={`rgba(232,149,122,${0.16 + arrivalGlow * 0.22})`}
@@ -95,16 +101,25 @@ export function SceneSeven() {
               fill="none"
             />
             {[0, 1].map((i) => (
-              <g key={i} transform={`translate(${690 + i * 78} ${466 + i * 8})`}>
-                <circle r={34 + arrivalGlow * 10} fill={`rgba(${i === 0 ? "232,149,122" : "100,181,246"},${0.08 + arrivalGlow * 0.12})`} />
-                <circle r={8 + arrivalGlow * 4} fill={`rgba(${i === 0 ? "232,149,122" : "100,181,246"},${0.32 + arrivalGlow * 0.28})`} />
+              <g
+                key={i}
+                transform={`translate(${690 + i * 78} ${466 + i * 8})`}
+              >
+                <circle
+                  r={34 + arrivalGlow * 10}
+                  fill={`rgba(${i === 0 ? "232,149,122" : "100,181,246"},${0.08 + arrivalGlow * 0.12})`}
+                />
+                <circle
+                  r={8 + arrivalGlow * 4}
+                  fill={`rgba(${i === 0 ? "232,149,122" : "100,181,246"},${0.32 + arrivalGlow * 0.28})`}
+                />
               </g>
             ))}
           </svg>
         </div>
 
         <div
-          className="absolute left-1/2 top-0 -translate-x-1/2 pointer-events-none"
+          className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2"
           style={{
             zIndex: 3,
             width: "2px",
@@ -114,23 +129,40 @@ export function SceneSeven() {
         />
 
         <div
-          className="absolute left-1/2 top-[9vh] z-6 w-[min(660px,88vw)] -translate-x-1/2 text-center pointer-events-none"
-          style={{ opacity: showOpening ? 1 : 0, transition: "opacity 0.9s ease" }}
+          className="pointer-events-none absolute top-[9vh] left-1/2 z-6 w-[min(660px,88vw)] -translate-x-1/2 text-center"
+          style={{
+            opacity: showOpening ? 1 : 0,
+            transition: "opacity 0.9s ease",
+          }}
         >
-          <p className="chapter-kicker" style={{ color: "var(--warm-gold)", opacity: 0.72, marginBottom: 10 }}>
+          <p
+            className="chapter-kicker"
+            style={{
+              color: "var(--warm-gold)",
+              opacity: 0.72,
+              marginBottom: 10,
+            }}
+          >
             Chapter VII
           </p>
           <h2 className="chapter-heading" style={{ color: "var(--champagne)" }}>
             {event.date}
           </h2>
-          <p className="chapter-date italic" style={{ color: "rgba(245,230,200,0.58)", marginTop: 12 }}>
+          <p
+            className="chapter-date italic"
+            style={{ color: "rgba(245,230,200,0.58)", marginTop: 12 }}
+          >
             The beginning of everything.
           </p>
         </div>
 
         <div
-          className="absolute left-1/2 top-1/2 z-5 pointer-events-none"
-          style={{ opacity: showCountdown ? 1 : 0, transform: "translate(-50%, -50%)", transition: "opacity 1s ease" }}
+          className="pointer-events-none absolute top-1/2 left-1/2 z-5"
+          style={{
+            opacity: showCountdown ? 1 : 0,
+            transform: "translate(-50%, -50%)",
+            transition: "opacity 1s ease",
+          }}
         >
           <div
             style={{
@@ -144,16 +176,34 @@ export function SceneSeven() {
         </div>
 
         <div
-          className="absolute bottom-[8vh] left-1/2 z-6 w-[min(720px,90vw)] -translate-x-1/2 text-center pointer-events-none"
-          style={{ opacity: showFinal ? 1 : 0, transform: `translateY(${showFinal ? 0 : 18}px)`, transition: "opacity 1.1s ease, transform 1.1s ease" }}
+          className="pointer-events-none absolute bottom-[8vh] left-1/2 z-6 w-[min(720px,90vw)] -translate-x-1/2 text-center"
+          style={{
+            opacity: showFinal ? 1 : 0,
+            transform: `translateY(${showFinal ? 0 : 18}px)`,
+            transition: "opacity 1.1s ease, transform 1.1s ease",
+          }}
         >
-          <p className="reveal-kicker" style={{ color: "var(--warm-gold)", opacity: 0.78, marginBottom: 16 }}>
+          <p
+            className="reveal-kicker"
+            style={{
+              color: "var(--warm-gold)",
+              opacity: 0.78,
+              marginBottom: 16,
+            }}
+          >
             {event.title}
           </p>
           <h3 className="reveal-heading" style={{ color: "var(--champagne)" }}>
             The beginning of everything.
           </h3>
-          <p className="story-copy italic" style={{ color: "rgba(245,230,200,0.62)", margin: "14px auto 0", maxWidth: 560 }}>
+          <p
+            className="story-copy italic"
+            style={{
+              color: "rgba(245,230,200,0.62)",
+              margin: "14px auto 0",
+              maxWidth: 560,
+            }}
+          >
             {event.description}
           </p>
         </div>

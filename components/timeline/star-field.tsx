@@ -40,7 +40,10 @@ export function StarField() {
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       // Most stars are tiny; a few are slightly larger
-      radius: Math.random() < 0.85 ? Math.random() * 0.8 + 0.2 : Math.random() * 1.5 + 0.8,
+      radius:
+        Math.random() < 0.85
+          ? Math.random() * 0.8 + 0.2
+          : Math.random() * 1.5 + 0.8,
       baseOpacity: Math.random() * 0.6 + 0.2,
       opacity: 0,
       twinkleSpeed: Math.random() * 0.005 + 0.002,
@@ -80,7 +83,7 @@ export function StarField() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full pointer-events-none"
+      className="pointer-events-none fixed inset-0 h-full w-full"
       style={{ zIndex: 0 }}
     />
   );

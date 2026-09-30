@@ -21,8 +21,14 @@ type FireworkProps = {
 };
 
 const COLORS = [
-  "#ffd700", "#ff6b9d", "#64b5f6", "#f0c97a",
-  "#ff8a65", "#ce93d8", "#ffffff", "#f5e6c8",
+  "#ffd700",
+  "#ff6b9d",
+  "#64b5f6",
+  "#f0c97a",
+  "#ff8a65",
+  "#ce93d8",
+  "#ffffff",
+  "#f5e6c8",
 ];
 
 function burst(x: number, y: number, count: number): Particle[] {
@@ -69,15 +75,14 @@ export function Fireworks({ active }: FireworkProps) {
     // Trigger initial bursts in various positions
     const spawnBursts = () => {
       const positions = [
-        [0.2, 0.25], [0.5, 0.15], [0.8, 0.25],
-        [0.35, 0.4], [0.65, 0.35],
+        [0.2, 0.25],
+        [0.5, 0.15],
+        [0.8, 0.25],
+        [0.35, 0.4],
+        [0.65, 0.35],
       ];
       for (const [px, py] of positions) {
-        const newParticles = burst(
-          canvas.width * px,
-          canvas.height * py,
-          40
-        );
+        const newParticles = burst(canvas.width * px, canvas.height * py, 40);
         state.particles.push(...newParticles);
       }
     };
@@ -124,7 +129,7 @@ export function Fireworks({ active }: FireworkProps) {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full pointer-events-none"
+      className="pointer-events-none fixed inset-0 h-full w-full"
       style={{
         zIndex: 3,
         opacity: active ? 1 : 0,

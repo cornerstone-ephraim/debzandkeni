@@ -51,10 +51,11 @@ export function MemoryCard({
 
   return (
     <div
-      className="absolute z-5 transition-none rounded-xl backdrop-blur-md px-4.5 py-3.5 sci-panel"
+      className="sci-panel absolute z-5 rounded-xl px-4.5 py-3.5 backdrop-blur-md transition-none"
       style={{
         opacity: cardProgress * exitProgress,
-        transform: `${positionTransform ?? ""} ${translateMap[entryFrom]}`.trim(),
+        transform:
+          `${positionTransform ?? ""} ${translateMap[entryFrom]}`.trim(),
         zIndex: 5,
         background:
           "linear-gradient(145deg, rgba(8,13,30,0.78), rgba(12,18,40,0.58) 62%, rgba(13,28,46,0.5))",
@@ -73,7 +74,8 @@ export function MemoryCard({
           style={{
             width: 28,
             height: 1,
-            background: "linear-gradient(90deg, rgba(154,223,255,0.58), transparent)",
+            background:
+              "linear-gradient(90deg, rgba(154,223,255,0.58), transparent)",
           }}
         />
       </div>

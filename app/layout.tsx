@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
-import { SmoothScrollProvider } from "@/components/motion/smooth-scroll-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,8 +27,8 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "The Debz & Keni Timeline",
-  description: "A scroll-driven timeline celebrating Debz and Keni.",
+  title: "Letters to Debz | Keniye",
+  description: "A little world of letters, from Keniye to Debz.",
 };
 
 export default function RootLayout({
@@ -42,9 +41,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${cormorantGaramond.variable} ${jost.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
-      </body>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }

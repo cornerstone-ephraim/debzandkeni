@@ -20,10 +20,10 @@ export function CharacterPair({ progress }: CharacterPairProps) {
   const charOpacity = Math.min(1, progress * 3);
 
   return (
-    <div className="relative w-full flex items-end justify-center gap-10 h-50">
+    <div className="relative flex h-50 w-full items-end justify-center gap-10">
       {/* Debz — left character */}
       <div
-        className="absolute transition-none translate-x-[-65%] transition-all duration-500 ease-linear"
+        className="absolute translate-x-[-65%] transition-all transition-none duration-500 ease-linear"
         style={{
           left: `calc(50% + ${debzOffset}%)`,
           opacity: charOpacity,
@@ -35,7 +35,7 @@ export function CharacterPair({ progress }: CharacterPairProps) {
       >
         <CharacterSilhouette gender="female" size="large" />
         <p
-          className="text-center mt-1 font-bold font-cormorant text-rose-warm transition-all duration-500 ease-linear "
+          className="mt-1 text-center font-cormorant font-bold text-rose-warm transition-all duration-500 ease-linear"
           style={{ opacity: progress > 0.85 ? 1 : 0 }}
         >
           Debz
@@ -44,7 +44,7 @@ export function CharacterPair({ progress }: CharacterPairProps) {
 
       {/* Keni — right character */}
       <div
-        className="absolute transition-none translate-x-[-35%] transition-all duration-500 ease-linear"
+        className="absolute translate-x-[-35%] transition-all transition-none duration-500 ease-linear"
         style={{
           left: `calc(50% + ${keniOffset}%)`,
           opacity: charOpacity,
@@ -56,7 +56,7 @@ export function CharacterPair({ progress }: CharacterPairProps) {
       >
         <CharacterSilhouette gender="male" size="large" />
         <p
-          className="text-center mt-1 font-semibold font-cormorant text-[#64b5f6] transition-all duration-500 ease-linear"
+          className="mt-1 text-center font-cormorant font-semibold text-[#64b5f6] transition-all duration-500 ease-linear"
           style={{ opacity: progress > 0.85 ? 1 : 0 }}
         >
           Keni

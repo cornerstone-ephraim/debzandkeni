@@ -73,7 +73,7 @@ const MEMORIES = [
     date: "April",
     icon: "🤝",
     entryFrom: "bottom" as const,
-    threshold: 0.50,
+    threshold: 0.5,
     positionStyle: { top: "40vh", left: "50%", transform: "translateX(-50%)" },
   },
   {
@@ -135,15 +135,15 @@ export function SceneThree() {
   // Apr: hsl(300, 22%, 10%) — warm plum
   // May: hsl(330, 22%, 10%) — dark rose
   const palProgress = Math.max(0, Math.min(1, (progress - 0.1) / 0.8));
-  const hue = 250 + palProgress * 80;       // 250 → 330
-  const sat = 28 - palProgress * 6;         // 28% → 22%
-  const lit = 9 + palProgress * 1.5;        // 9% → 10.5%
+  const hue = 250 + palProgress * 80; // 250 → 330
+  const sat = 28 - palProgress * 6; // 28% → 22%
+  const lit = 9 + palProgress * 1.5; // 9% → 10.5%
   const bgColor = `hsl(${hue}, ${sat}%, ${lit}%)`;
 
   // Horizon glow: shifts from warm-gold → rose as month advances
-  const glowR = Math.round(212 + palProgress * 40);   // 212 → 252
-  const glowG = Math.round(168 - palProgress * 60);   // 168 → 108
-  const glowB = Math.round(83 + palProgress * 40);    // 83  → 123
+  const glowR = Math.round(212 + palProgress * 40); // 212 → 252
+  const glowG = Math.round(168 - palProgress * 60); // 168 → 108
+  const glowB = Math.round(83 + palProgress * 40); // 83  → 123
   const horizonOpacity = 0.07 + progress * 0.16;
 
   // Which month label to show (top-left corner)
@@ -152,17 +152,20 @@ export function SceneThree() {
 
   // Text phases
   const showChapterLabel = progress < 0.12;
-  const showMonthLabel   = progress >= 0.12 && progress < 0.82;
-  const showClosingText  = progress >= 0.80;
+  const showMonthLabel = progress >= 0.12 && progress < 0.82;
+  const showClosingText = progress >= 0.8;
 
   // Parallax
-  const bgParallax  = progress * -35;
+  const bgParallax = progress * -35;
   const midParallax = progress * -60;
 
   // Path draw progress: the golden trail behind the couple grows as they journey
   // We represent this as a strokeDashoffset on an SVG path
   const pathLength = 900; // approx SVG units
-  const pathDrawn = Math.max(0, Math.min(pathLength, pathLength * (progress - 0.1) / 0.8));
+  const pathDrawn = Math.max(
+    0,
+    Math.min(pathLength, (pathLength * (progress - 0.1)) / 0.8),
+  );
   const photoReveal = Math.max(0, Math.min(1, (progress - 0.68) / 0.14));
   const photoHold = Math.max(0, Math.min(1, (0.9 - progress) / 0.1));
   const photoOpacity = photoReveal * photoHold;
@@ -179,10 +182,9 @@ export function SceneThree() {
           background: bgColor,
         }}
       >
-
         {/* ── LAYER 1: Deep nebula atmosphere ── */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{ transform: `translateY(${bgParallax}px)`, zIndex: 1 }}
         >
           {/* Left plum cloud */}
@@ -213,7 +215,7 @@ export function SceneThree() {
           />
           {/* Horizon warm glow */}
           <div
-            className="absolute bottom-0 left-0 right-0"
+            className="absolute right-0 bottom-0 left-0"
             style={{
               height: "40vh",
               background: `radial-gradient(ellipse at 50% 100%, rgba(${glowR},${glowG},${glowB},${horizonOpacity}) 0%, transparent 70%)`,
@@ -221,7 +223,7 @@ export function SceneThree() {
           />
           {/* Extra top atmospheric haze */}
           <div
-            className="absolute top-0 left-0 right-0"
+            className="absolute top-0 right-0 left-0"
             style={{
               height: "30vh",
               background: `radial-gradient(ellipse at 50% 0%, rgba(${glowR - 20},${glowG},${glowB + 20},0.06) 0%, transparent 70%)`,
@@ -231,19 +233,25 @@ export function SceneThree() {
 
         {/* ── LAYER 2: Growing trail path ── */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{ transform: `translateY(${midParallax}px)`, zIndex: 2 }}
         >
           <svg
-            className="absolute w-full h-full"
+            className="absolute h-full w-full"
             viewBox="0 0 1440 900"
             preserveAspectRatio="xMidYMid slice"
           >
             <defs>
               <linearGradient id="trailGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor={`rgba(212,168,83,0.08)`} />
-                <stop offset="60%" stopColor={`rgba(${glowR},${glowG},${glowB},0.25)`} />
-                <stop offset="100%" stopColor={`rgba(${glowR},${glowG},${glowB},0.05)`} />
+                <stop
+                  offset="60%"
+                  stopColor={`rgba(${glowR},${glowG},${glowB},0.25)`}
+                />
+                <stop
+                  offset="100%"
+                  stopColor={`rgba(${glowR},${glowG},${glowB},0.05)`}
+                />
               </linearGradient>
             </defs>
 
@@ -264,7 +272,10 @@ export function SceneThree() {
               { cx: 880, cy: 395, month: "Apr" },
               { cx: 1160, cy: 272, month: "May" },
             ].map(({ cx, cy, month }, i) => {
-              const dotProgress = Math.max(0, Math.min(1, (palProgress - i * 0.22) / 0.15));
+              const dotProgress = Math.max(
+                0,
+                Math.min(1, (palProgress - i * 0.22) / 0.15),
+              );
               return (
                 <g key={month}>
                   <circle
@@ -300,19 +311,20 @@ export function SceneThree() {
 
         {/* ── LAYER 3: Timeline connector from scene 2 ── */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
+          className="pointer-events-none absolute left-1/2 -translate-x-1/2"
           style={{
             zIndex: 3,
             top: 0,
             width: "2px",
             height: `${10 + progress * 20}vh`,
-            background: "linear-gradient(to bottom, rgba(212,168,83,0.45), transparent)",
+            background:
+              "linear-gradient(to bottom, rgba(212,168,83,0.45), transparent)",
           }}
         />
 
         {/* ── LAYER 4: Characters together, drifting slightly ── */}
         <div
-          className="absolute pointer-events-none"
+          className="pointer-events-none absolute"
           style={{
             zIndex: 4,
             bottom: "10vh",
@@ -323,8 +335,16 @@ export function SceneThree() {
             gap: "4px",
           }}
         >
-          <JourneyFigure gender="female" progress={progress} palette={{ r: glowR, g: glowG, b: glowB }} />
-          <JourneyFigure gender="male" progress={progress} palette={{ r: glowR, g: glowG, b: glowB }} />
+          <JourneyFigure
+            gender="female"
+            progress={progress}
+            palette={{ r: glowR, g: glowG, b: glowB }}
+          />
+          <JourneyFigure
+            gender="male"
+            progress={progress}
+            palette={{ r: glowR, g: glowG, b: glowB }}
+          />
         </div>
 
         {/* ── LAYER 5: Memory cards ── */}
@@ -354,7 +374,7 @@ export function SceneThree() {
 
         {/* ── LAYER 5B: Real memory photograph ── */}
         <div
-          className="absolute z-5 pointer-events-none"
+          className="pointer-events-none absolute z-5"
           style={{
             top: isMobile ? "52vh" : "41vh",
             left: isMobile ? "50%" : "66vw",
@@ -365,7 +385,7 @@ export function SceneThree() {
           aria-hidden="true"
         >
           <div
-            className="relative overflow-hidden rounded-[22px] backdrop-blur-md sci-panel"
+            className="sci-panel relative overflow-hidden rounded-[22px] backdrop-blur-md"
             style={{
               width: isMobile ? "min(82vw, 310px)" : "min(28vw, 340px)",
               aspectRatio: "0.78",
@@ -395,13 +415,14 @@ export function SceneThree() {
                 mixBlendMode: "multiply",
               }}
             />
-            <div className="absolute left-4 right-4 top-4 flex items-center justify-between gap-3">
+            <div className="absolute top-4 right-4 left-4 flex items-center justify-between gap-3">
               <span className="system-label">Memory captured</span>
               <span
                 style={{
                   height: 1,
                   width: 34,
-                  background: "linear-gradient(90deg, rgba(154,223,255,0.56), transparent)",
+                  background:
+                    "linear-gradient(90deg, rgba(154,223,255,0.56), transparent)",
                 }}
               />
             </div>
@@ -410,7 +431,7 @@ export function SceneThree() {
 
         {/* ── TEXT: Chapter opening label ── */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none"
+          className="pointer-events-none absolute left-1/2 -translate-x-1/2 text-center"
           style={{
             zIndex: 6,
             top: "10vh",
@@ -460,7 +481,7 @@ export function SceneThree() {
 
         {/* ── TEXT: Floating month label (top-left, cycles as you scroll) ── */}
         <div
-          className="absolute pointer-events-none"
+          className="pointer-events-none absolute"
           style={{
             zIndex: 6,
             top: "6vh",
@@ -492,7 +513,7 @@ export function SceneThree() {
 
         {/* ── TEXT: Closing reveal ── */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none"
+          className="pointer-events-none absolute left-1/2 -translate-x-1/2 text-center"
           style={{
             zIndex: 6,
             top: "9vh",
@@ -567,7 +588,12 @@ function JourneyFigure({
   const glowColor = `rgba(${palette.r},${palette.g},${palette.b},0.4)`;
 
   return (
-    <div style={{ opacity, transform: `translateY(${gender === "female" ? bob : -bob}px)` }}>
+    <div
+      style={{
+        opacity,
+        transform: `translateY(${gender === "female" ? bob : -bob}px)`,
+      }}
+    >
       <CharacterSilhouette
         gender={gender}
         size="medium"

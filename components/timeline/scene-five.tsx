@@ -43,25 +43,25 @@ export function SceneFive() {
         }}
       >
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{ transform: `translateY(${bgParallax}px)`, zIndex: 1 }}
         >
           <div
-            className="absolute left-[-8%] top-[-6%] h-[62vw] w-[62vw] rounded-[50%]"
+            className="absolute top-[-6%] left-[-8%] h-[62vw] w-[62vw] rounded-[50%]"
             style={{
               background: `radial-gradient(circle, rgba(232,149,122,${0.14 + progress * 0.14}) 0%, transparent 70%)`,
               filter: "blur(84px)",
             }}
           />
           <div
-            className="absolute right-[-10%] top-[18%] h-[58vw] w-[58vw] rounded-[50%]"
+            className="absolute top-[18%] right-[-10%] h-[58vw] w-[58vw] rounded-[50%]"
             style={{
               background: `radial-gradient(circle, rgba(100,181,246,${0.06 + splitProgress * 0.12}) 0%, transparent 68%)`,
               filter: "blur(90px)",
             }}
           />
           <div
-            className="absolute bottom-0 left-0 right-0 h-[52vh]"
+            className="absolute right-0 bottom-0 left-0 h-[52vh]"
             style={{
               background: `radial-gradient(ellipse at 50% 100%, rgba(240,201,122,${
                 0.1 + splitProgress * 0.16
@@ -71,12 +71,22 @@ export function SceneFive() {
         </div>
 
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{ transform: `translateY(${midParallax}px)`, zIndex: 2 }}
         >
-          <svg className="absolute h-full w-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+          <svg
+            className="absolute h-full w-full"
+            viewBox="0 0 1440 900"
+            preserveAspectRatio="xMidYMid slice"
+          >
             <defs>
-              <linearGradient id="singleToTwin" x1="0%" y1="0%" x2="100%" y2="0%">
+              <linearGradient
+                id="singleToTwin"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
                 <stop offset="0%" stopColor="rgba(212,168,83,0.12)" />
                 <stop offset="48%" stopColor="rgba(240,201,122,0.38)" />
                 <stop offset="100%" stopColor="rgba(100,181,246,0.12)" />
@@ -102,8 +112,19 @@ export function SceneFive() {
               fill="none"
               strokeDasharray={`${splitProgress * 640} 640`}
             />
-            <circle cx="720" cy="500" r={6 + splitProgress * 7} fill={`rgba(240,201,122,${0.35 + splitProgress * 0.45})`} />
-            <circle cx="720" cy="500" r={18 + splitProgress * 20} fill="none" stroke={`rgba(240,201,122,${splitProgress * 0.2})`} />
+            <circle
+              cx="720"
+              cy="500"
+              r={6 + splitProgress * 7}
+              fill={`rgba(240,201,122,${0.35 + splitProgress * 0.45})`}
+            />
+            <circle
+              cx="720"
+              cy="500"
+              r={18 + splitProgress * 20}
+              fill="none"
+              stroke={`rgba(240,201,122,${splitProgress * 0.2})`}
+            />
             {[
               { cx: 990, cy: 333, color: "232,149,122" },
               { cx: 1030, cy: 615, color: "100,181,246" },
@@ -122,43 +143,75 @@ export function SceneFive() {
         </div>
 
         <div
-          className="absolute left-1/2 top-0 -translate-x-1/2 pointer-events-none"
+          className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2"
           style={{
             zIndex: 3,
             width: "2px",
             height: `${12 + progress * 22}vh`,
-            background: "linear-gradient(to bottom, rgba(212,168,83,0.42), transparent)",
+            background:
+              "linear-gradient(to bottom, rgba(212,168,83,0.42), transparent)",
           }}
         />
 
         <TwinReveal progress={progress} />
 
         <div
-          className="absolute left-1/2 top-[10vh] z-6 w-[min(620px,88vw)] -translate-x-1/2 text-center pointer-events-none"
-          style={{ opacity: showOpening ? 1 : 0, transition: "opacity 0.9s ease" }}
+          className="pointer-events-none absolute top-[10vh] left-1/2 z-6 w-[min(620px,88vw)] -translate-x-1/2 text-center"
+          style={{
+            opacity: showOpening ? 1 : 0,
+            transition: "opacity 0.9s ease",
+          }}
         >
-          <p className="chapter-kicker" style={{ color: "var(--warm-gold)", opacity: 0.72, marginBottom: 10 }}>
+          <p
+            className="chapter-kicker"
+            style={{
+              color: "var(--warm-gold)",
+              opacity: 0.72,
+              marginBottom: 10,
+            }}
+          >
             Chapter V
           </p>
           <h2 className="chapter-heading" style={{ color: "var(--champagne)" }}>
             {event.chapter}
           </h2>
-          <p className="chapter-date italic" style={{ color: "var(--champagne)", opacity: 0.42, marginTop: 12 }}>
+          <p
+            className="chapter-date italic"
+            style={{ color: "var(--champagne)", opacity: 0.42, marginTop: 12 }}
+          >
             {event.date}
           </p>
         </div>
 
         <div
-          className="absolute left-1/2 top-[74vh] z-6 w-[min(700px,90vw)] -translate-x-1/2 text-center pointer-events-none"
-          style={{ opacity: showRevealText ? 1 : 0, transform: `translateY(${showRevealText ? 0 : 18}px)`, transition: "opacity 1.1s ease, transform 1.1s ease" }}
+          className="pointer-events-none absolute top-[74vh] left-1/2 z-6 w-[min(700px,90vw)] -translate-x-1/2 text-center"
+          style={{
+            opacity: showRevealText ? 1 : 0,
+            transform: `translateY(${showRevealText ? 0 : 18}px)`,
+            transition: "opacity 1.1s ease, transform 1.1s ease",
+          }}
         >
-          <p className="reveal-kicker" style={{ color: "var(--warm-gold)", opacity: 0.8, marginBottom: 12 }}>
+          <p
+            className="reveal-kicker"
+            style={{
+              color: "var(--warm-gold)",
+              opacity: 0.8,
+              marginBottom: 12,
+            }}
+          >
             {event.date}
           </p>
           <h3 className="reveal-heading" style={{ color: "var(--champagne)" }}>
             The future doubled.
           </h3>
-          <p className="story-copy italic" style={{ color: "rgba(245,230,200,0.62)", margin: "14px auto 0", maxWidth: 520 }}>
+          <p
+            className="story-copy italic"
+            style={{
+              color: "rgba(245,230,200,0.62)",
+              margin: "14px auto 0",
+              maxWidth: 520,
+            }}
+          >
             One journey became two new paths.
           </p>
         </div>

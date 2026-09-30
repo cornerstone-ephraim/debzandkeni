@@ -1,5 +1,5 @@
-import { TimelinePage } from "@/components/timeline/timeline-page";
+import { LettersExperience } from "@/components/letters/letters-experience";
 
 export default function Home() {
-  return <TimelinePage />;
+  return <LettersExperience />;
 }

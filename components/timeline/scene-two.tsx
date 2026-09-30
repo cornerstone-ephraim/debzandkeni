@@ -99,9 +99,9 @@ export function SceneTwo() {
   // ── Background: warms from midnight navy → indigo → soft amber-night ──
   // Scene 1 ends at roughly hsl(200, 50%, 7%).
   // We pick up from there and warm toward hsl(240, 35%, 8%) → hsl(260, 28%, 9%)
-  const hue = 230 - progress * 15;        // 230 → 215 (shift toward warmer purple-blue)
-  const sat = 50 - progress * 18;         // 50% → 32%
-  const lit = 7 + progress * 2;           // 7% → 9%
+  const hue = 230 - progress * 15; // 230 → 215 (shift toward warmer purple-blue)
+  const sat = 50 - progress * 18; // 50% → 32%
+  const lit = 7 + progress * 2; // 7% → 9%
   const bgColor = `hsl(${hue}, ${sat}%, ${lit}%)`;
 
   // Horizon warm glow strengthens as the month passes
@@ -116,17 +116,19 @@ export function SceneTwo() {
 
   // Text phases
   const showChapterLabel = progress < 0.12;
-  const showDayCounter   = progress > 0.08 && progress < 0.78;
-  const showClosingText  = progress >= 0.76;
+  const showDayCounter = progress > 0.08 && progress < 0.78;
+  const showClosingText = progress >= 0.76;
 
   // Parallax offsets
-  const bgParallax  = progress * -30;
+  const bgParallax = progress * -30;
   const midParallax = progress * -55;
   const activeMobileMemoryIndex = MEMORIES.reduce(
-    (activeIndex, memory, index) => (progress >= memory.threshold - 0.04 ? index : activeIndex),
-    -1
+    (activeIndex, memory, index) =>
+      progress >= memory.threshold - 0.04 ? index : activeIndex,
+    -1,
   );
-  const activeMobileMemory = activeMobileMemoryIndex >= 0 ? MEMORIES[activeMobileMemoryIndex] : null;
+  const activeMobileMemory =
+    activeMobileMemoryIndex >= 0 ? MEMORIES[activeMobileMemoryIndex] : null;
 
   return (
     <div ref={containerRef} style={{ height: "400vh", position: "relative" }}>
@@ -139,10 +141,9 @@ export function SceneTwo() {
           background: bgColor,
         }}
       >
-
         {/* ── LAYER 1: Deep background nebula ── */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{ transform: `translateY(${bgParallax}px)`, zIndex: 1 }}
         >
           {/* Warm indigo cloud — left */}
@@ -154,7 +155,8 @@ export function SceneTwo() {
               width: "55vw",
               height: "55vw",
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(60,35,100,0.3) 0%, transparent 70%)",
+              background:
+                "radial-gradient(circle, rgba(60,35,100,0.3) 0%, transparent 70%)",
               filter: "blur(70px)",
             }}
           />
@@ -173,7 +175,7 @@ export function SceneTwo() {
           />
           {/* Bottom horizon warmth */}
           <div
-            className="absolute bottom-0 left-0 right-0"
+            className="absolute right-0 bottom-0 left-0"
             style={{
               height: "40vh",
               background: `radial-gradient(ellipse at 50% 100%, rgba(212,168,83,${horizonOpacity}) 0%, transparent 70%)`,
@@ -183,11 +185,11 @@ export function SceneTwo() {
 
         {/* ── LAYER 2: Floating constellation path ── */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{ transform: `translateY(${midParallax}px)`, zIndex: 2 }}
         >
           <svg
-            className="absolute w-full h-full"
+            className="absolute h-full w-full"
             viewBox="0 0 1440 900"
             preserveAspectRatio="xMidYMid slice"
           >
@@ -201,8 +203,13 @@ export function SceneTwo() {
             />
             {/* Small star nodes on the path */}
             {[
-              [200, 750], [360, 660], [520, 590],
-              [720, 500], [920, 445], [1100, 345], [1240, 250],
+              [200, 750],
+              [360, 660],
+              [520, 590],
+              [720, 500],
+              [920, 445],
+              [1100, 345],
+              [1240, 250],
             ].map(([cx, cy], i) => (
               <circle
                 key={i}
@@ -218,19 +225,20 @@ export function SceneTwo() {
         {/* ── LAYER 3: Timeline vertical connector ── */}
         {/* Bridges Scene 1's timeline line into Scene 2 */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
+          className="pointer-events-none absolute left-1/2 -translate-x-1/2"
           style={{
             zIndex: 3,
             top: 0,
             width: "2px",
             height: `${12 + progress * 25}vh`,
-            background: "linear-gradient(to bottom, rgba(212,168,83,0.5), transparent)",
+            background:
+              "linear-gradient(to bottom, rgba(212,168,83,0.5), transparent)",
           }}
         />
 
         {/* ── LAYER 4: Couple walking together ── */}
         <div
-          className="absolute pointer-events-none"
+          className="pointer-events-none absolute"
           style={{
             zIndex: 4,
             bottom: "14vh",
@@ -251,7 +259,7 @@ export function SceneTwo() {
         {/* ── LAYER 5: Memory cards ── */}
         {isMobile && activeMobileMemory ? (
           <div
-            className="absolute left-1/2 top-[49vh] z-5 w-[min(88vw,330px)] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            className="pointer-events-none absolute top-[49vh] left-1/2 z-5 w-[min(88vw,330px)] -translate-x-1/2 -translate-y-1/2"
             style={{ transition: "none" }}
           >
             <MemoryCard
@@ -284,7 +292,10 @@ export function SceneTwo() {
                         : index < activeMobileMemoryIndex
                           ? "rgba(154,223,255,0.48)"
                           : "rgba(245,230,200,0.18)",
-                    boxShadow: index === activeMobileMemoryIndex ? "0 0 12px rgba(212,168,83,0.24)" : "none",
+                    boxShadow:
+                      index === activeMobileMemoryIndex
+                        ? "0 0 12px rgba(212,168,83,0.24)"
+                        : "none",
                   }}
                 />
               ))}
@@ -309,7 +320,7 @@ export function SceneTwo() {
 
         {/* ── TEXT: Chapter label ── */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none"
+          className="pointer-events-none absolute left-1/2 -translate-x-1/2 text-center"
           style={{
             zIndex: 6,
             top: "10vh",
@@ -359,7 +370,7 @@ export function SceneTwo() {
 
         {/* ── TEXT: Day counter ── */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none"
+          className="pointer-events-none absolute left-1/2 -translate-x-1/2 text-center"
           style={{
             zIndex: 6,
             top: "12vh",
@@ -413,7 +424,7 @@ export function SceneTwo() {
 
         {/* ── TEXT: Closing "Still here" ── */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none"
+          className="pointer-events-none absolute left-1/2 -translate-x-1/2 text-center"
           style={{
             zIndex: 6,
             top: "10vh",

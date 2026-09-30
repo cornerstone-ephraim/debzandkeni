@@ -17,7 +17,7 @@ export function TwinReveal({ progress }: TwinRevealProps) {
 
   return (
     <div
-      className="absolute left-1/2 top-1/2 z-5 pointer-events-none md:top-[42vh]"
+      className="pointer-events-none absolute top-1/2 left-1/2 z-5 md:top-[42vh]"
       style={{
         opacity: reveal,
         transform: "translate(-50%, -50%)",
@@ -26,7 +26,7 @@ export function TwinReveal({ progress }: TwinRevealProps) {
       aria-hidden="true"
     >
       <div
-        className="relative w-[min(94vw,720px)] overflow-hidden rounded-[20px] sci-panel md:w-[min(82vw,860px)] md:rounded-3xl"
+        className="sci-panel relative w-[min(94vw,720px)] overflow-hidden rounded-[20px] md:w-[min(82vw,860px)] md:rounded-3xl"
         style={{
           height: isMobile ? "min(54vh, 340px)" : "min(54vh, 430px)",
           transform: `scale(${0.88 + reveal * 0.12})`,
@@ -101,7 +101,7 @@ export function TwinReveal({ progress }: TwinRevealProps) {
         </div>
 
         <div
-          className="absolute left-3 right-3 top-3 flex items-center justify-between gap-3 font-jost uppercase md:left-4 md:right-4"
+          className="absolute top-3 right-3 left-3 flex items-center justify-between gap-3 font-jost uppercase md:right-4 md:left-4"
           style={{
             zIndex: 3,
             color: "rgba(154,223,255,0.68)",

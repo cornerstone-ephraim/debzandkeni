@@ -20,7 +20,9 @@ export function CountdownClock({ progress }: CountdownClockProps) {
   const clampedProgress = clampProgress(progress);
   const isStruck = clampedProgress >= 0.985;
   const remainingSeconds = isStruck ? 0 : Math.ceil((1 - clampedProgress) * 59);
-  const timeString = isStruck ? "00:00:00" : `11:59:${padTime(remainingSeconds)}`;
+  const timeString = isStruck
+    ? "00:00:00"
+    : `11:59:${padTime(remainingSeconds)}`;
   const clockOpacity = Math.min(1, clampedProgress * 4);
 
   return (
@@ -49,9 +51,7 @@ export function CountdownClock({ progress }: CountdownClockProps) {
           border: `1px solid rgba(212,168,83,${isStruck ? 0.9 : 0.35})`,
           borderRadius: "8px",
           padding: "10px 20px",
-          background: isStruck
-            ? "rgba(212,168,83,0.15)"
-            : "rgba(8,11,26,0.7)",
+          background: isStruck ? "rgba(212,168,83,0.15)" : "rgba(8,11,26,0.7)",
           backdropFilter: "blur(8px)",
           transition: "all 0.5s ease",
           boxShadow: isStruck
@@ -62,7 +62,9 @@ export function CountdownClock({ progress }: CountdownClockProps) {
         <p
           style={{
             fontFamily: "var(--font-cormorant)",
-            fontSize: isStruck ? "clamp(2.25rem, 8vw, 3rem)" : "clamp(2rem, 7vw, 2.5rem)",
+            fontSize: isStruck
+              ? "clamp(2.25rem, 8vw, 3rem)"
+              : "clamp(2rem, 7vw, 2.5rem)",
             fontWeight: 300,
             letterSpacing: "0.05em",
             color: isStruck ? "var(--soft-gold)" : "var(--champagne)",

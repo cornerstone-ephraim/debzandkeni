@@ -35,9 +35,12 @@ export function CountdownToArrival({
   const glowProgress = Math.max(0, Math.min(1, progress));
 
   useEffect(() => {
-    const interval = window.setInterval(() => {
-      setNowMs(Date.now());
-    }, 60 * 60 * 1000);
+    const interval = window.setInterval(
+      () => {
+        setNowMs(Date.now());
+      },
+      60 * 60 * 1000,
+    );
 
     return () => window.clearInterval(interval);
   }, []);
@@ -49,7 +52,7 @@ export function CountdownToArrival({
 
   return (
     <div
-      className="relative w-[min(92vw,620px)] rounded-[24px] px-6 py-8 text-center backdrop-blur-md sci-panel md:px-8 md:py-9"
+      className="sci-panel relative w-[min(92vw,620px)] rounded-[24px] px-6 py-8 text-center backdrop-blur-md md:px-8 md:py-9"
       style={{
         background:
           "linear-gradient(145deg, rgba(8,13,30,0.78), rgba(12,18,40,0.58) 58%, rgba(13,28,46,0.48))",
@@ -65,7 +68,8 @@ export function CountdownToArrival({
           style={{
             height: 1,
             width: 44,
-            background: "linear-gradient(90deg, rgba(154,223,255,0.62), transparent)",
+            background:
+              "linear-gradient(90deg, rgba(154,223,255,0.62), transparent)",
           }}
         />
       </div>
@@ -137,7 +141,8 @@ export function CountdownToArrival({
           maxWidth: "460px",
         }}
       >
-        Soon this space can hold names, photos, times, weights, and the first details of two new lives.
+        Soon this space can hold names, photos, times, weights, and the first
+        details of two new lives.
       </p>
     </div>
   );

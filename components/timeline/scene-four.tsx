@@ -27,7 +27,8 @@ export function SceneFour() {
   const bgParallax = progress * -28;
   const midParallax = progress * -48;
   const pulse = 0.5 + Math.sin(progress * Math.PI * 14) * 0.5;
-  const heartbeatOpacity = progress > 0.2 && progress < 0.82 ? 0.18 + pulse * 0.18 : 0;
+  const heartbeatOpacity =
+    progress > 0.2 && progress < 0.82 ? 0.18 + pulse * 0.18 : 0;
   const testReveal = Math.max(0, Math.min(1, (progress - 0.38) / 0.28));
   const showOpening = progress < 0.16;
   const showAnticipation = progress >= 0.16 && progress < 0.58;
@@ -48,25 +49,26 @@ export function SceneFour() {
         }}
       >
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{ transform: `translateY(${bgParallax}px)`, zIndex: 1 }}
         >
           <div
-            className="absolute left-[-10%] top-[8%] h-[60vw] w-[60vw] rounded-[50%]"
+            className="absolute top-[8%] left-[-10%] h-[60vw] w-[60vw] rounded-[50%]"
             style={{
-              background: "radial-gradient(circle, rgba(125,55,96,0.24) 0%, transparent 70%)",
+              background:
+                "radial-gradient(circle, rgba(125,55,96,0.24) 0%, transparent 70%)",
               filter: "blur(80px)",
             }}
           />
           <div
-            className="absolute right-[-12%] top-[24%] h-[52vw] w-[52vw] rounded-[50%]"
+            className="absolute top-[24%] right-[-12%] h-[52vw] w-[52vw] rounded-[50%]"
             style={{
               background: `radial-gradient(circle, rgba(232,149,122,${0.08 + progress * 0.1}) 0%, transparent 68%)`,
               filter: "blur(78px)",
             }}
           />
           <div
-            className="absolute bottom-0 left-0 right-0 h-[46vh]"
+            className="absolute right-0 bottom-0 left-0 h-[46vh]"
             style={{
               background: `radial-gradient(ellipse at 50% 100%, rgba(240,201,122,${
                 0.07 + progress * 0.13
@@ -76,10 +78,14 @@ export function SceneFour() {
         </div>
 
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{ transform: `translateY(${midParallax}px)`, zIndex: 2 }}
         >
-          <svg className="absolute h-full w-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+          <svg
+            className="absolute h-full w-full"
+            viewBox="0 0 1440 900"
+            preserveAspectRatio="xMidYMid slice"
+          >
             <path
               d="M 130 760 C 330 610 510 565 690 520 C 850 482 1030 394 1260 220"
               stroke="rgba(212,168,83,0.16)"
@@ -108,7 +114,7 @@ export function SceneFour() {
         </div>
 
         <div
-          className="absolute left-1/2 top-0 -translate-x-1/2 pointer-events-none"
+          className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2"
           style={{
             zIndex: 3,
             width: "2px",
@@ -118,7 +124,7 @@ export function SceneFour() {
         />
 
         <div
-          className="absolute left-1/2 top-[48vh] z-5 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          className="pointer-events-none absolute top-[48vh] left-1/2 z-5 -translate-x-1/2 -translate-y-1/2"
           style={{
             opacity: testReveal,
             transform: `translate(-50%, -50%) scale(${0.86 + testReveal * 0.14}) rotate(${
@@ -127,9 +133,10 @@ export function SceneFour() {
           }}
         >
           <div
-            className="relative h-[74px] w-[min(76vw,360px)] rounded-full sci-panel"
+            className="sci-panel relative h-[74px] w-[min(76vw,360px)] rounded-full"
             style={{
-              background: "linear-gradient(100deg, rgba(245,230,200,0.92), rgba(232,213,176,0.78))",
+              background:
+                "linear-gradient(100deg, rgba(245,230,200,0.92), rgba(232,213,176,0.78))",
               border: "1px solid rgba(154,223,255,0.24)",
               boxShadow: `0 16px 70px rgba(0,0,0,0.42), 0 0 ${42 + pulse * 34}px rgba(232,149,122,0.22), 0 0 ${
                 22 + pulse * 22
@@ -137,19 +144,19 @@ export function SceneFour() {
             }}
           >
             <div
-              className="absolute left-7 top-1/2 h-9 w-20 -translate-y-1/2 rounded-full"
+              className="absolute top-1/2 left-7 h-9 w-20 -translate-y-1/2 rounded-full"
               style={{ background: "rgba(12,18,40,0.12)" }}
             />
             <div
-              className="absolute right-10 top-1/2 h-9 w-28 -translate-y-1/2 rounded-full"
+              className="absolute top-1/2 right-10 h-9 w-28 -translate-y-1/2 rounded-full"
               style={{ background: "rgba(12,18,40,0.08)" }}
             >
               <div
-                className="absolute left-8 top-1/2 h-6 w-[3px] -translate-y-1/2 rounded-full"
+                className="absolute top-1/2 left-8 h-6 w-[3px] -translate-y-1/2 rounded-full"
                 style={{ background: "rgba(232,149,122,0.78)" }}
               />
               <div
-                className="absolute left-14 top-1/2 h-6 w-[3px] -translate-y-1/2 rounded-full"
+                className="absolute top-1/2 left-14 h-6 w-[3px] -translate-y-1/2 rounded-full"
                 style={{ background: "rgba(232,149,122,0.78)" }}
               />
             </div>
@@ -157,34 +164,65 @@ export function SceneFour() {
         </div>
 
         <div
-          className="absolute left-1/2 top-[10vh] z-6 w-[min(620px,88vw)] -translate-x-1/2 text-center pointer-events-none"
-          style={{ opacity: showOpening ? 1 : 0, transition: "opacity 0.9s ease" }}
+          className="pointer-events-none absolute top-[10vh] left-1/2 z-6 w-[min(620px,88vw)] -translate-x-1/2 text-center"
+          style={{
+            opacity: showOpening ? 1 : 0,
+            transition: "opacity 0.9s ease",
+          }}
         >
-          <p className="chapter-kicker" style={{ color: "var(--warm-gold)", opacity: 0.72, marginBottom: 10 }}>
+          <p
+            className="chapter-kicker"
+            style={{
+              color: "var(--warm-gold)",
+              opacity: 0.72,
+              marginBottom: 10,
+            }}
+          >
             Chapter IV
           </p>
           <h2 className="chapter-heading" style={{ color: "var(--champagne)" }}>
             {event.chapter}
           </h2>
-          <p className="chapter-date italic" style={{ color: "var(--champagne)", opacity: 0.42, marginTop: 12 }}>
+          <p
+            className="chapter-date italic"
+            style={{ color: "var(--champagne)", opacity: 0.42, marginTop: 12 }}
+          >
             {event.date}
           </p>
         </div>
 
         <div
-          className="absolute left-1/2 top-[13vh] z-6 w-[min(560px,88vw)] -translate-x-1/2 text-center pointer-events-none"
-          style={{ opacity: showAnticipation ? 1 : 0, transform: `translateY(${showAnticipation ? 0 : 12}px)`, transition: "opacity 0.9s ease, transform 0.9s ease" }}
+          className="pointer-events-none absolute top-[13vh] left-1/2 z-6 w-[min(560px,88vw)] -translate-x-1/2 text-center"
+          style={{
+            opacity: showAnticipation ? 1 : 0,
+            transform: `translateY(${showAnticipation ? 0 : 12}px)`,
+            transition: "opacity 0.9s ease, transform 0.9s ease",
+          }}
         >
-          <p className="story-copy italic" style={{ color: "rgba(245,230,200,0.68)", letterSpacing: "0.04em" }}>
+          <p
+            className="story-copy italic"
+            style={{ color: "rgba(245,230,200,0.68)", letterSpacing: "0.04em" }}
+          >
             Something in the timeline began to answer back.
           </p>
         </div>
 
         <div
-          className="absolute left-1/2 top-[11vh] z-6 w-[min(680px,90vw)] -translate-x-1/2 text-center pointer-events-none"
-          style={{ opacity: showReveal ? 1 : 0, transform: `translateY(${showReveal ? 0 : 16}px)`, transition: "opacity 1.1s ease, transform 1.1s ease" }}
+          className="pointer-events-none absolute top-[11vh] left-1/2 z-6 w-[min(680px,90vw)] -translate-x-1/2 text-center"
+          style={{
+            opacity: showReveal ? 1 : 0,
+            transform: `translateY(${showReveal ? 0 : 16}px)`,
+            transition: "opacity 1.1s ease, transform 1.1s ease",
+          }}
         >
-          <p className="reveal-kicker" style={{ color: "var(--warm-gold)", opacity: 0.8, marginBottom: 16 }}>
+          <p
+            className="reveal-kicker"
+            style={{
+              color: "var(--warm-gold)",
+              opacity: 0.8,
+              marginBottom: 16,
+            }}
+          >
             {event.date}
           </p>
           <h3 className="reveal-heading" style={{ color: "var(--champagne)" }}>
